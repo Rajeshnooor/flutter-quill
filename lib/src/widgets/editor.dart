@@ -8,6 +8,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_quill/nooor_widgets/audioplayer/nooor_audioplayer.dart';
+import 'package:flutter_quill/nooor_widgets/image/n_imagecard.dart';
+import 'package:flutter_quill/nooor_widgets/videoplayer/video_items.dart';
+import 'package:flutter_quill/nooor_widgets/videoplayer/youtube_player.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -144,10 +148,38 @@ String _standardizeImageUrl(String url) {
 }
 
 bool _isMobile() => io.Platform.isAndroid || io.Platform.isIOS;
-
+//Srinivas
 Widget _defaultEmbedBuilder(
     BuildContext context, leaf.Embed node, bool readOnly) {
   assert(!kIsWeb, 'Please provide EmbedBuilder for Web');
+  switch (node.value.type) {
+    case 'image':
+      // node.style.attributes['width']
+
+      final imageUrl = _standardizeImageUrl(node.value.data);
+      return ImageCard(
+        imageUrl: imageUrl,
+      );
+    case 'video':
+      final videoUrl = _standardizeImageUrl(node.value.data);
+      return VideoItems(
+        videoUrl: videoUrl,
+      );
+    case 'audio':
+      return const NEditorAPlayer();
+    case 'youtube':
+      final videoId = _standardizeImageUrl(node.value.data);
+      return NEditorYTPlayer(
+        videoId: videoId,
+      );
+    default:
+      throw UnimplementedError(
+        'Embeddable type "${node.value.type}" is not supported by default '
+        'embed builder of QuillEditor. You must pass your own builder function '
+        'to embedBuilder property of QuillEditor or QuillField widgets.',
+      );
+  }
+  /*
   switch (node.value.type) {
     case 'image':
       final imageUrl = _standardizeImageUrl(node.value.data);
@@ -222,6 +254,7 @@ Widget _defaultEmbedBuilder(
         'to embedBuilder property of QuillEditor or QuillField widgets.',
       );
   }
+  */
 }
 
 class QuillEditor extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../models/documents/attribute.dart';
 import '../utils/media_pick_setting.dart';
@@ -45,6 +46,7 @@ typedef WebVideoPickImpl = Future<String?> Function(
     OnVideoPickCallback onImagePickCallback);
 typedef MediaPickSettingSelector = Future<MediaPickSetting?> Function(
     BuildContext context);
+typedef ImagePickImpl = Future<String> Function(ImageSource source); //Srinivas
 
 // The default size of the icon of a button.
 const double kDefaultIconSize = 18;
