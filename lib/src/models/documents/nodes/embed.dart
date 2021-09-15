@@ -40,6 +40,17 @@ class BlockEmbed extends Embeddable {
   static const String imageType = 'image';
   static BlockEmbed image(String imageUrl) => BlockEmbed(imageType, imageUrl);
 
+//Srinivas
   static const String videoType = 'video';
   static BlockEmbed video(String videoUrl) => BlockEmbed(videoType, videoUrl);
+
+  static const String audioType = 'audio';
+  static BlockEmbed audio(String audioUrl) => BlockEmbed(audioType, audioUrl);
+
+  static const String youtubeType = 'youtube';
+  static BlockEmbed youtube(String youtubeUrl) =>
+      BlockEmbed(youtubeType, youtubeUrl);
+
+  // static const String videoType = 'video';
+  // static BlockEmbed video(String videoUrl) => BlockEmbed(videoType, videoUrl);
 }
